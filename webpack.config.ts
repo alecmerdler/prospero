@@ -3,7 +3,7 @@ import * as path from 'path';
 
 export default {
   entry: {
-    app: './app.ts',
+    app: './src/app.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

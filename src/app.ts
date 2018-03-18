@@ -3,14 +3,20 @@ import { TemplateResult } from 'lit-html';
 
 import { Component, initialize } from './framework';
 
+export const Button: Component<ButtonProps> = (props) => {
+  return html`
+    <button onclick="${props.engage}">Engage</button>
+  `;
+};
+
 export const App: Component<AppProps> = (props) => {
-  const onClick = () => {
+  const engage = () => {
     console.log(props.name);
     props.dispatch({name: 'Alec'});
   };
 
   return html`<div>
-    <button onclick="${onClick}">Engage</button>
+    ${Button({engage})}
     <div>
       ${props.name ? props.name.toUpperCase() : 'Unknown'}
     </div>
@@ -20,9 +26,13 @@ export const App: Component<AppProps> = (props) => {
 // FIXME: Global store :(
 const store = {};
 
-initialize(store);
+initialize(store)({})(App);
 
 type AppProps = {
   name: string;
   dispatch: (newStore: any) => void;
+};
+
+export type ButtonProps = {
+  engage: () => void;
 };
