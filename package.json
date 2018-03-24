@@ -7,11 +7,13 @@
   "author": "Alec Merdler <alecmerdler@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/.bin/webpack --watch --progress",
-    "build": "NODE_ENV=production ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/.bin/webpack"
+    "dev": "ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/.bin/webpack --mode development --watch --progress",
+    "build": "NODE_ENV=production ts-node -O '{\"module\":\"commonjs\"}' ./node_modules/.bin/webpack --mode production",
+    "serve": "http-server ."
   },
   "devDependencies": {
     "@types/webpack": "^4.1.1",
+    "http-server": "^0.11.1",
     "ts-loader": "^4.1.0",
     "ts-node": "^5.0.1",
     "typescript": "^2.7.2",

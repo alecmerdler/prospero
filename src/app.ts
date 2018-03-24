@@ -2,6 +2,7 @@ import { html, render } from 'lit-html/lib/lit-extended';
 import { TemplateResult } from 'lit-html';
 
 import { Component, initialize } from './framework';
+import { GooeyMenu } from './components/gooey-menu';
 
 export const Button: Component<ButtonProps> = (props) => {
   return html`
@@ -19,6 +20,9 @@ export const App: Component<AppProps> = (props) => {
     ${Button({engage})}
     <div>
       ${props.name ? props.name.toUpperCase() : 'Unknown'}
+    </div>
+    <div style="width: 100%; height: 100%;">
+      ${GooeyMenu({})}
     </div>
   </div>`;
 };
