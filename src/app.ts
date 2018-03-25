@@ -17,10 +17,6 @@ export const App: Component<AppProps> = (props) => {
   };
 
   return html`<div>
-    ${Button({engage})}
-    <div>
-      ${props.name ? props.name.toUpperCase() : 'Unknown'}
-    </div>
     <div style="width: 100%; height: 100%;">
       ${GooeyMenu({})}
     </div>

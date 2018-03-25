@@ -1,16 +1,21 @@
+# Build stage
 FROM mhart/alpine-node:9 as build
 
 WORKDIR /usr/src/app
 
-COPY index.html .
+# Install dependencies
 COPY package.json .
+COPY yarn.lock .
+RUN yarn install
 
-RUN npm install
+# Build bundle
 COPY . .
+RUN yarn run build
 
-FROM nginx:alpine
+# Run stage
+FROM bitnami/nginx
 # FIXME(alecmerdler): Only copy `dist` directory
-COPY --from=build /usr/src/app/dist /usr/share/nginx/html
-COPY --from=build /usr/src/app/index.html /usr/share/nginx/html
-COPY --from=build /usr/src/app/manifest.json /usr/share/nginx/html
-COPY --from=build /usr/src/app/src /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist /app/dist
+COPY --from=build /usr/src/app/index.html /app/index.html
+COPY --from=build /usr/src/app/manifest.json /app/manifest.json
+COPY --from=build /usr/src/app/src /app/src
